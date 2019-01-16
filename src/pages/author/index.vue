@@ -1,7 +1,7 @@
 <template>
   <div>
-    <input type='text' placeholder='电子邮件' v-model='wxAuthorEmail'></input>
-    <input type='number' maxlength='6' placeholder='验证码' v-model='verifyCode'></input>
+    <input type='text' placeholder='电子邮件' v-model='wxAuthorEmail' />
+    <input type='number' maxlength='6' placeholder='验证码' v-model='verifyCode' />
     <button type='primary' plain='true' size='mini' v-on:click='getVerifyCode()'>{{verifyMsg}}</button>
     <button type='primary' plain='true' v-on:click='registerAuthor()'>提交</button>
   </div>
@@ -20,8 +20,8 @@
     },
     methods: {
       getVerifyCode () {
-        console.log(this.wxAuthorEmail)
-        authorAPI.register('test')
+        let data = 'test'
+        authorAPI.register(data)
       }
     }
   }

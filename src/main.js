@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App'
-import global from './data/global'
+import globalData from './data/globalData.js'
 
-Vue.prototype.global = global
+Vue.prototype.globalData = globalData
 Vue.config.productionTip = false
 App.mpType = 'app'
 
