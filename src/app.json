@@ -1,10 +1,7 @@
 {
   "pages": [
     "pages/author/main",
-    "pages/test/main",
-    "pages/index/main",
-    "pages/logs/main",
-    "pages/counter/main"
+    "pages/test/main"
   ],
   "window": {
     "backgroundTextStyle": "light",

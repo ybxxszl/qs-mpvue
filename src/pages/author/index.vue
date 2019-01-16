@@ -9,7 +9,6 @@
 
 <script>
   import authorAPI from '../../api/author/authorAPI'
-
   export default {
     data () {
       return {
@@ -20,8 +19,14 @@
     },
     methods: {
       getVerifyCode () {
-        let data = 'test'
-        authorAPI.register(data)
+        let data = {
+          wxAuthorEmail: this.wxAuthorEmail
+        }
+        authorAPI.register(data).then(result => {
+          console.log(result)
+        }).catch(error => {
+          console.log(error)
+        })
       }
     }
   }
