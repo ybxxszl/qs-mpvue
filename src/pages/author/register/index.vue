@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import authorAPI from '../../api/author/authorAPI'
+  import authorAPI from '../../../api/author/authorAPI'
   export default {
     data () {
       return {
@@ -22,10 +22,30 @@
         let data = {
           wxAuthorEmail: this.wxAuthorEmail
         }
-        authorAPI.register(data).then(result => {
+        authorAPI.getVerifyCode(data).then(result => {
           console.log(result)
         }).catch(error => {
           console.log(error)
+        })
+      },
+      registerAuthor () {
+        wx.getUserInfo({
+          success (result) {
+            let data = {
+              wxAuthorEmail: this.wxAuthorEmail,
+              verifyCode: this.verifyCode,
+              encryptedData: result.encryptedData,
+              iv: result.iv,
+              sessionKey: this.global.sessionKey
+            }
+            authorAPI.register(data).then(result => {
+              wx.redirectTo({
+                url: '/pages/index/index'
+              })
+            }).catch(error => {
+              console.log(error)
+            })
+          }
         })
       }
     }
