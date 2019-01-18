@@ -31,6 +31,7 @@
       registerAuthor () {
         wx.getUserInfo({
           success (result) {
+            console.log(result)
             let data = {
               wxAuthorEmail: this.wxAuthorEmail,
               verifyCode: this.verifyCode,
@@ -39,6 +40,7 @@
               sessionKey: this.global.sessionKey
             }
             authorAPI.register(data).then(result => {
+              console.log(result)
               wx.redirectTo({
                 url: '/pages/index/index'
               })
