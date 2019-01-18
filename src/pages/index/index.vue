@@ -1,6 +1,8 @@
 <template>
   <div>
-    <van-notify id='van-notify' />
+    <div>
+      <van-notify id='van-notify' />
+    </div>
     <div v-if='needRegister'>
       <div v-if='needAuthorize'>
         <button type='primary' plain='true' open-type="getUserInfo" v-on:getuserinfo='register'>授权注册</button>
@@ -55,6 +57,7 @@
     },
     mounted () {
       console.log('4 - mounted')
+      this.login()
     },
     beforeUpdate () {
       console.log('5 - beforeUpdate')
@@ -77,9 +80,6 @@
     errorCaptured () {
       console.log('11 - errorCaptured')
     },
-    onShow () {
-      this.login()
-    },
     methods: {
       login () {
         let that = this
@@ -97,25 +97,26 @@
                   }
                 })
               } else {
-                this.wxAuthorId = result.wxAuthor.wxAuthorId
-                this.wxAuthorEmail = result.wxAuthor.wxAuthorEmail
-                this.wxAuthorNickName = result.wxAuthor.wxAuthorNickName
-                this.wxAuthorSex = result.wxAuthor.wxAuthorSex
-                this.wxAuthorCountry = result.wxAuthor.wxAuthorCountry
-                this.wxAuthorProvince = result.wxAuthor.wxAuthorProvince
-                this.wxAuthorCity = result.wxAuthor.wxAuthorCity
-                this.wxAuthorAvatarUrl = result.wxAuthor.wxAuthorAvatarUrl
-                this.global.wxAuthorId = this.wxAuthorId
-                this.global.wxAuthorEmail = this.wxAuthorEmail
-                this.global.wxAuthorNickName = this.wxAuthorNickName
-                this.global.wxAuthorSex = this.wxAuthorSex
-                this.global.wxAuthorCountry = this.wxAuthorCountry
-                this.global.wxAuthorProvince = this.wxAuthorProvince
-                this.global.wxAuthorCity = this.wxAuthorCity
-                this.global.wxAuthorAvatarUrl = this.wxAuthorAvatarUrl
+                that.wxAuthorId = result.wxAuthor.wxAuthorId
+                that.wxAuthorEmail = result.wxAuthor.wxAuthorEmail
+                that.wxAuthorNickName = result.wxAuthor.wxAuthorNickName
+                that.wxAuthorSex = result.wxAuthor.wxAuthorSex
+                that.wxAuthorCountry = result.wxAuthor.wxAuthorCountry
+                that.wxAuthorProvince = result.wxAuthor.wxAuthorProvince
+                that.wxAuthorCity = result.wxAuthor.wxAuthorCity
+                that.wxAuthorAvatarUrl = result.wxAuthor.wxAuthorAvatarUrl
+                that.global.wxAuthorId = that.wxAuthorId
+                that.global.wxAuthorEmail = that.wxAuthorEmail
+                that.global.wxAuthorNickName = that.wxAuthorNickName
+                that.global.wxAuthorSex = that.wxAuthorSex
+                that.global.wxAuthorCountry = that.wxAuthorCountry
+                that.global.wxAuthorProvince = that.wxAuthorProvince
+                that.global.wxAuthorCity = that.wxAuthorCity
+                that.global.wxAuthorAvatarUrl = that.wxAuthorAvatarUrl
               }
+              that.global.sessionKey = result.data.sessionKey
             }).catch(error => {
-              console.log(error)
+              notify(error)
             })
           }
         })
