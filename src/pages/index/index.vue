@@ -1,33 +1,36 @@
 <template>
   <div>
     <div>
-      <van-notify id='van-notify' />
+      <van-notify id='van-notify'></van-notify>
     </div>
     <div v-if='needRegister'>
       <div v-if='needAuthorize'>
-        <button type='primary' plain='true' open-type="getUserInfo" v-on:getuserinfo='register'>授权注册</button>
+        <van-button plain type='primary' size='large' open-type='getUserInfo' @getuserinfo='register'>授权注册</van-button>
       </div>
       <div v-else>
-        <button type='primary' plain='true' v-on:click='register'>注册</button>
+        <van-button plain type='primary' size='large' @click='register'>注册</van-button>
       </div>
     </div>
     <div v-else>
       <div>
-        <button type='primary' plain='true' v-on:click='showList'>显示</button>
+        <van-button plain type='primary' size='large' @click='showList'>显示</van-button>
       </div>
-      <div>{{wxAuthorId}}</div>
-      <div>{{wxAuthorEmail}}</div>
-      <div>{{wxAuthorNickName}}</div>
-      <div>{{wxAuthorSex}}</div>
-      <div>{{wxAuthorCountry}}</div>
-      <div>{{wxAuthorProvince}}</div>
-      <div>{{wxAuthorCity}}</div>
-      <div>{{wxAuthorAvatarUrl}}</div>
+      <div>
+        <van-cell title='ID' label='Id'  icon='idcard' size='large' border=true>{{wxAuthorId}}</van-cell>
+        <van-cell title='电子邮件' label='Email' icon='comment-o' size='large' border=true>{{wxAuthorEmail}}</van-cell>
+        <van-cell title='昵称' label='NickName' icon='user-o' size='large' border=true>{{wxAuthorNickName}}</van-cell>
+        <van-cell title='性别' label='Sex' icon='like-o' size='large' border=true>{{wxAuthorSex}}</van-cell>
+        <van-cell title='国' label='Country' icon='location-o' size='large' border=true>{{wxAuthorCountry}}</van-cell>
+        <van-cell title='省' label='Province' icon='location-o' size='large' border=true>{{wxAuthorProvince}}</van-cell>
+        <van-cell title='市' label='City' icon='location-o' size='large' border=true>{{wxAuthorCity}}</van-cell>
+        <van-cell title='照片' label='AvatarUrl' icon='photo-o' size='large' border=true>{{wxAuthorAvatarUrl}}</van-cell>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  // https://youzan.github.io/vant-weapp/#/intro
   import notify from '@/../static/vant/notify/notify'
   import indexAPI from '../../api/index/indexAPI'
 
@@ -89,6 +92,7 @@
               code: msg.code
             }
             indexAPI.login(data).then(result => {
+              result = result.data
               if (result.token === undefined && result.wxAuthor === undefined) {
                 that.needRegister = true
                 wx.getSetting({
@@ -114,7 +118,7 @@
                 that.global.wxAuthorCity = that.wxAuthorCity
                 that.global.wxAuthorAvatarUrl = that.wxAuthorAvatarUrl
               }
-              that.global.sessionKey = result.data.sessionKey
+              that.global.sessionKey = result.sessionKey
             }).catch(error => {
               notify(error)
             })

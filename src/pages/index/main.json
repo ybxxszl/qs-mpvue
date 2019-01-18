@@ -1,6 +1,11 @@
 {
   "navigationBarTitleText": "首页",
   "usingComponents": {
-    "van-notify": "/static/vant/notify/index"
+    "van-notify": "/static/vant/notify/index",
+    "van-button": "/static/vant/button/index",
+    "van-cell": "/static/vant/cell/index",
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-icon": "/static/vant/icon/index",
+    "van-field": "/static/vant/field/index"
   }
 }
