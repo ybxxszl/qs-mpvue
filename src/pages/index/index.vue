@@ -16,7 +16,7 @@
         <van-button plain type='primary' size='large' @click='showList'>显示</van-button>
       </div>
       <div>
-        <van-cell title='ID' label='Id'  icon='idcard' size='large' border=true>{{wxAuthorId}}</van-cell>
+        <van-cell title='ID' label='Id' icon='idcard' size='large' border=true>{{wxAuthorId}}</van-cell>
         <van-cell title='电子邮件' label='Email' icon='comment-o' size='large' border=true>{{wxAuthorEmail}}</van-cell>
         <van-cell title='昵称' label='NickName' icon='user-o' size='large' border=true>{{wxAuthorNickName}}</van-cell>
         <van-cell title='性别' label='Sex' icon='like-o' size='large' border=true>{{wxAuthorSex}}</van-cell>
@@ -30,7 +30,6 @@
 </template>
 
 <script>
-  // https://youzan.github.io/vant-weapp/#/intro
   import notify from '@/../static/vant/notify/notify'
   import indexAPI from '../../api/index/indexAPI'
 
@@ -49,39 +48,9 @@
         wxAuthorAvatarUrl: ''
       }
     },
-    beforeCreate () {
-      console.log('1 - beforeCreate')
-    },
-    created () {
-      console.log('2 - created')
-    },
-    beforeMount () {
-      console.log('3 - beforeMount')
-    },
     mounted () {
-      console.log('4 - mounted')
-      this.login()
-    },
-    beforeUpdate () {
-      console.log('5 - beforeUpdate')
-    },
-    updated () {
-      console.log('6 - updated')
-    },
-    activated () {
-      console.log('7 - activated')
-    },
-    deactivated () {
-      console.log('8 - deactivated')
-    },
-    beforeDestroy () {
-      console.log('9 - beforeDestroy')
-    },
-    destroyed () {
-      console.log('10 - destroyed')
-    },
-    errorCaptured () {
-      console.log('11 - errorCaptured')
+      let that = this
+      that.login()
     },
     methods: {
       login () {
@@ -93,6 +62,7 @@
             }
             indexAPI.login(data).then(result => {
               result = result.data
+              that.global.sessionKey = result.sessionKey
               if (result.token === undefined && result.wxAuthor === undefined) {
                 that.needRegister = true
                 wx.getSetting({
@@ -101,24 +71,24 @@
                   }
                 })
               } else {
-                that.wxAuthorId = result.wxAuthor.wxAuthorId
-                that.wxAuthorEmail = result.wxAuthor.wxAuthorEmail
-                that.wxAuthorNickName = result.wxAuthor.wxAuthorNickName
-                that.wxAuthorSex = result.wxAuthor.wxAuthorSex
-                that.wxAuthorCountry = result.wxAuthor.wxAuthorCountry
-                that.wxAuthorProvince = result.wxAuthor.wxAuthorProvince
-                that.wxAuthorCity = result.wxAuthor.wxAuthorCity
-                that.wxAuthorAvatarUrl = result.wxAuthor.wxAuthorAvatarUrl
-                that.global.wxAuthorId = that.wxAuthorId
-                that.global.wxAuthorEmail = that.wxAuthorEmail
-                that.global.wxAuthorNickName = that.wxAuthorNickName
-                that.global.wxAuthorSex = that.wxAuthorSex
-                that.global.wxAuthorCountry = that.wxAuthorCountry
-                that.global.wxAuthorProvince = that.wxAuthorProvince
-                that.global.wxAuthorCity = that.wxAuthorCity
-                that.global.wxAuthorAvatarUrl = that.wxAuthorAvatarUrl
+                let wxAuthor = result.wxAuthor
+                that.wxAuthorId = wxAuthor.wxAuthorId
+                that.wxAuthorEmail = wxAuthor.wxAuthorEmail
+                that.wxAuthorNickName = wxAuthor.wxAuthorNickName
+                that.wxAuthorSex = wxAuthor.wxAuthorSex
+                that.wxAuthorCountry = wxAuthor.wxAuthorCountry
+                that.wxAuthorProvince = wxAuthor.wxAuthorProvince
+                that.wxAuthorCity = wxAuthor.wxAuthorCity
+                that.wxAuthorAvatarUrl = wxAuthor.wxAuthorAvatarUrl
+                that.global.wxAuthorId = wxAuthor.wxAuthorId
+                that.global.wxAuthorEmail = wxAuthor.wxAuthorEmail
+                that.global.wxAuthorNickName = wxAuthor.wxAuthorNickName
+                that.global.wxAuthorSex = wxAuthor.wxAuthorSex
+                that.global.wxAuthorCountry = wxAuthor.wxAuthorCountry
+                that.global.wxAuthorProvince = wxAuthor.wxAuthorProvince
+                that.global.wxAuthorCity = wxAuthor.wxAuthorCity
+                that.global.wxAuthorAvatarUrl = wxAuthor.wxAuthorAvatarUrl
               }
-              that.global.sessionKey = result.sessionKey
             }).catch(error => {
               notify(error)
             })

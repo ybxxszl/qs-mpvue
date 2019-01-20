@@ -1,5 +1,3 @@
-<!-- 菩提本无树，明镜亦非台；本来无一物，何处惹尘埃。 -->
-
 <!-- <template>
   <div>
     <a href="/pages/index/main" class="home">去往首页</a>
