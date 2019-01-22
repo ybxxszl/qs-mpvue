@@ -13,7 +13,9 @@ fly.interceptors.request.use(
     })
     request.headers = {
       'X-Tag': 'flyio',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'H-WXAuthorId': wx.getStorageSync('wxAuthorId'),
+      'H-Token': wx.getStorageSync('token')
     }
     request.body && Object.keys(request.body).forEach((value) => {
       if (request.body[value] === '') {

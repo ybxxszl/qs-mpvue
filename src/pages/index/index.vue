@@ -88,6 +88,8 @@
                 that.global.wxAuthorProvince = wxAuthor.wxAuthorProvince
                 that.global.wxAuthorCity = wxAuthor.wxAuthorCity
                 that.global.wxAuthorAvatarUrl = wxAuthor.wxAuthorAvatarUrl
+                wx.setStorageSync('wxAuthorId', wxAuthor.wxAuthorId)
+                wx.setStorageSync('token', result.token)
               }
             }).catch(error => {
               notify(error)
