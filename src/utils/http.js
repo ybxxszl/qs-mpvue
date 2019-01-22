@@ -1,4 +1,4 @@
-import config from '../config'
+import config from '@/config'
 
 import FlyIO from 'flyio/dist/npm/wx'
 

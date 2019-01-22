@@ -1,3 +1,3 @@
-const routers = require('./routers/main')
+const routers = require('@/routers/main')
 
 module.exports = routers

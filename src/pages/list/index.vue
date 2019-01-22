@@ -16,7 +16,7 @@
 
 <script>
   import notify from '@/../static/vant/notify/notify'
-  import listAPI from '../../api/list/listAPI'
+  import listAPI from '@/api/list/listAPI'
 
   export default {
     data () {

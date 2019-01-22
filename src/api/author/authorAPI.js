@@ -1,4 +1,4 @@
-import http from '../../utils/http'
+import http from '@/utils/http'
 
 function sendVerifyCode (data) {
   return http.get('author/send', data)

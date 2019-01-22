@@ -1,4 +1,4 @@
-const author = require('./author')
+const author = require('@/author')
 
 export default {
   author

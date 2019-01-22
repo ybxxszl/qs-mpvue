@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import App from './App'
-import global from './global.js'
+import App from '@/App'
+import global from '@/global.js'
 
 Vue.prototype.global = global
 Vue.config.productionTip = false

@@ -31,7 +31,7 @@
 
 <script>
   import notify from '@/../static/vant/notify/notify'
-  import indexAPI from '../../api/index/indexAPI'
+  import indexAPI from '@/api/index/indexAPI'
 
   export default {
     data () {
