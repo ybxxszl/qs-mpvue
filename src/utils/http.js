@@ -1,5 +1,7 @@
 import config from '@/config'
 
+import notify from '@/../static/vant/notify/notify'
+
 import FlyIO from 'flyio/dist/npm/wx'
 
 const fly = new FlyIO()
@@ -14,7 +16,7 @@ fly.interceptors.request.use(
     request.headers = {
       'X-Tag': 'flyio',
       'content-type': 'application/json',
-      'H-WXAuthorId': wx.getStorageSync('wxAuthorId'),
+      'H-AuthorId': wx.getStorageSync('wxAuthorId'),
       'H-Token': wx.getStorageSync('token')
     }
     request.body && Object.keys(request.body).forEach((value) => {
@@ -37,6 +39,7 @@ fly.interceptors.response.use(
   (error) => {
     wx.hideLoading()
     console.log(error)
+    notify(error.response.data.message)
     return error.response.data
   }
 )
